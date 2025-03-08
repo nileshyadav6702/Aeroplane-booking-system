@@ -1,6 +1,6 @@
 const express=require('express')
 const {AirplaneController}=require('../../controllers');
-const { AirplaneMiddleware } = require('../../middlewares');
+const { AirplaneMiddleware ,MongoIdMiddleware} = require('../../middlewares');
 const airplaneRoute=express.Router()
 
 /// api/v1/airplanes POST
@@ -10,6 +10,12 @@ airplaneRoute.post("/", AirplaneMiddleware.validatecreateairplane, AirplaneContr
 airplaneRoute.get("/", AirplaneController.getairplanes);
 
 //api/v1/airplanes/:id
-airplaneRoute.get("/:id", AirplaneController.getAirPlane);
+airplaneRoute.get("/:id", MongoIdMiddleware, AirplaneController.getAirPlane);
+
+//api/v1/airplanes/:id
+airplaneRoute.delete(
+  "/:id",
+  MongoIdMiddleware,AirplaneController.deleteAirPlane
+);
 
 module.exports=airplaneRoute

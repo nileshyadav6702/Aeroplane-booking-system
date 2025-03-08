@@ -38,10 +38,34 @@ async function getAirPlane(id){
         return airplane
     }
     catch(error){
+        if(error.StatusCodes==StatusCodes.NOT_FOUND){
+            throw new AppError('The airplane you requested is not found',StatusCodes.NOT_FOUND)
+        }
         throw new AppError('Cannot fetch data from all airplanes',StatusCodes.NOT_FOUND)
+    }
+}
+async function deleteAirPlane(id){
+    try{
+        let airplane = await airplanerepository.delete(id);
+        airplane.msg=`the airplane with id ${id} deleted successfullly`
+        return airplane
+    }
+    catch(error){
+         if (error.StatusCodes == StatusCodes.NOT_FOUND) {
+           throw new AppError(
+             "The airplane you requested to delete is not found",
+             StatusCodes.NOT_FOUND
+           );
+         }
+        throw new AppError('Not able to find the airplane with provided id',StatusCodes.NOT_FOUND)
     }
 }
 
 
 
-module.exports={createairplane,getAllAirplanes,getAirPlane}
+module.exports = {
+  createairplane,
+  getAllAirplanes,
+  getAirPlane,
+  deleteAirPlane,
+};
