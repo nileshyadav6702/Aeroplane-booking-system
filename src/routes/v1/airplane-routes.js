@@ -9,4 +9,7 @@ airplaneRoute.post("/", AirplaneMiddleware.validatecreateairplane, AirplaneContr
 //api/v1/airplanes/
 airplaneRoute.get("/", AirplaneController.getairplanes);
 
+//api/v1/airplanes/:id
+airplaneRoute.get("/:id", AirplaneController.getAirPlane);
+
 module.exports=airplaneRoute

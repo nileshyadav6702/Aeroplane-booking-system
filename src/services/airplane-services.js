@@ -32,7 +32,16 @@ async function getAllAirplanes(){
         throw new AppError('Cannot fetch data from all airplanes',StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
+async function getAirPlane(id){
+    try{
+        let airplane = await airplanerepository.get(id);
+        return airplane
+    }
+    catch(error){
+        throw new AppError('Cannot fetch data from all airplanes',StatusCodes.NOT_FOUND)
+    }
+}
 
 
 
-module.exports={createairplane,getAllAirplanes}
+module.exports={createairplane,getAllAirplanes,getAirPlane}
