@@ -60,6 +60,21 @@ async function deleteAirPlane(id){
         throw new AppError('Not able to find the airplane with provided id',StatusCodes.NOT_FOUND)
     }
 }
+async function updateAirplane(id,data){
+    try{
+        let airplane = await airplanerepository.update(id,data);
+        return { msg: `the airplane with id ${id} updated successfullly` };
+    }
+    catch(error){
+         if (error.StatusCodes == StatusCodes.NOT_FOUND) {
+           throw new AppError(
+             "The airplane you requested to update is not found",
+             StatusCodes.NOT_FOUND
+           );
+         }
+        throw new AppError('Not able to find the airplane with provided id',StatusCodes.NOT_FOUND)
+    }
+}
 
 
 
@@ -68,4 +83,5 @@ module.exports = {
   getAllAirplanes,
   getAirPlane,
   deleteAirPlane,
+  updateAirplane,
 };

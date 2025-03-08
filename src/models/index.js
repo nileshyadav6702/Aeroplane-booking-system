@@ -1,5 +1,6 @@
 module.exports = {
-  AirplaneModel: require("./Airplane")
+  AirplaneModel: require("./Airplane"),
+  CityModel: require("./City"),
 };
 
 

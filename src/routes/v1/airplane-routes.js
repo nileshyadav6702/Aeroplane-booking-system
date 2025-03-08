@@ -17,5 +17,10 @@ airplaneRoute.delete(
   "/:id",
   MongoIdMiddleware,AirplaneController.deleteAirPlane
 );
+//api/v1/airplanes/:id
+airplaneRoute.put(
+  "/:id",
+  MongoIdMiddleware,AirplaneController.updateAirplane
+);
 
 module.exports=airplaneRoute
