@@ -1,0 +1,38 @@
+const { AppError } = require('../utils')
+const {AirplaneRepository}=require('../repositories')
+const {StatusCodes}=require('http-status-codes')
+
+const airplanerepository=new AirplaneRepository()
+
+async function createairplane(data){
+    try{
+        const airplane=await airplanerepository.create(data)
+        return airplane
+    }
+    catch(error){
+        if(error.errors.name=='ValidationError'){
+            console.log('error occured')
+            let explanation=[]
+            error.erros.forEach((err)=>{
+                explanation.push(err.message)
+            })
+            // console.log(explanation)
+            throw new AppError(error.errors,StatusCodes.BAD_REQUEST)
+        }
+        throw new AppError('Cannot create an airplane object',StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+}
+
+async function getAllAirplanes(){
+    try{
+        let airplanes = await airplanerepository.getAll();
+        return airplanes
+    }
+    catch(error){
+        throw new AppError('Cannot fetch data from all airplanes',StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+}
+
+
+
+module.exports={createairplane,getAllAirplanes}
