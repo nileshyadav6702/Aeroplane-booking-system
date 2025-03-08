@@ -1,4 +1,5 @@
 module.exports={
     AirplaneMiddleware:require('./airplane-middleware'),
-    MongoIdMiddleware:require('./mogoIdValidator')
+    MongoIdMiddleware:require('./mogoIdValidator'),
+    CityMiddleware:require('./city-middleware')
 }

@@ -11,7 +11,7 @@ async function AddCity(data){
         return city
     }
     catch(error){
-        throw new AppError('city is already present can not create another with same name',StatusCodes.BAD_REQUEST)
+        throw new AppError('City name with the same name exits already', StatusCodes.BAD_REQUEST);
     }
 }
 async function GetAllCity(){
