@@ -14,7 +14,6 @@ connectDB()
 app.use('/api',router)
 
 //running the server on the port
-app.listen(ServerConfig.PORT,()=>{
+app.listen(ServerConfig.PORT,async ()=>{
     console.log(`server started on port ${ServerConfig.PORT}`)
-    // Logger.info('successfully started the server','root',{})
 })
