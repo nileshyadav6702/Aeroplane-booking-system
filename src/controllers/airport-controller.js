@@ -5,7 +5,8 @@ const { CommonError } = require("../utils");
 
 async function AddAirport(req,res) {
     try{
-        const airport=await AirportService.AddAirport(req.body)
+        const {name, address, cityId, code} = req.body
+        const airport=await AirportService.AddAirport({name, address, cityId, code})
         CommonError.SuccessResponse.data=airport
         return res.status(StatusCodes.CREATED).json(CommonError.SuccessResponse)
     }

@@ -2,6 +2,7 @@ const mongoose=require('mongoose')
 
 const AirplaneSchema = new mongoose.Schema({
   modelNumber: String,
+  
   Capacity: {
     type:Number,
     default:0,

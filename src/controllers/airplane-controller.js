@@ -19,7 +19,6 @@ async function createairplane(req,res){
           .json(CommonError.ErrorResponse);
     }
 }
-
 async function getairplanes(req,res){
     try{
         let allairplanes =await  AirplaneService.getAllAirplanes();

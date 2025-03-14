@@ -22,7 +22,6 @@ async function createairplane(data){
         throw new AppError('Cannot create an airplane object',StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
-
 async function getAllAirplanes(){
     try{
         let airplanes = await airplanerepository.getAll();
