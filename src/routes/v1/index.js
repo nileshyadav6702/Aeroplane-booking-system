@@ -10,7 +10,7 @@ v1routes.get("/info", InfoController.getInfo);
 
 v1routes.use("/airplanes", airplaneRoute); 
 v1routes.use("/city", cityRoute); 
-v1routes.use("/airport", airportRoute); 
-v1routes.use("/flight", flightRoute); 
+v1routes.use("/airports", airportRoute); 
+v1routes.use("/flights", flightRoute); 
 
 module.exports=v1routes

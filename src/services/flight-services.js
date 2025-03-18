@@ -14,9 +14,45 @@ async function createFlight(data){
         throw new AppError('Cannot create a new flight object',StatusCodes.INTERNAL_SERVER_ERROR)
     }
 }
-async function getAllFlights(){
-    try{
-        let flights = await flightrepository.getAll();
+async function getAllFlights(query){
+    let customFilter = {}
+    let sortingFilter ={}
+
+    if( query.trips ) { // MUM-DEL
+        const [departureAirportId, arrivalAirportId] = query.trips.split('-')
+        customFilter.departureAirportId = departureAirportId
+        customFilter.arrivalAirportId = arrivalAirportId
+        // TODO: departureAirportId and arrivalAirportId should not be same
+    }
+
+    if(query.price) {
+        const [minprice, maxprice] = query.price.split('-')
+        customFilter.price = { $gte: minprice, $lte: maxprice }
+    }
+
+    if(query.travellers) {
+        customFilter.totalSeats = { $gte: parseInt(query.travellers) }
+    }
+
+    if(query.tripDate) {
+      const targetDate = new Date(query.tripDate); // Target date
+      const startOfDay = new Date(targetDate.setHours(0, 0, 0, 0)); // 00:00
+      const endOfDay = new Date(targetDate.setHours(23, 59, 59, 999)); // 23:59
+      customFilter.departureTime = { $gte: startOfDay, $lte: endOfDay };
+    }
+
+    if(query.sort) {
+        const sortorder = { ASCE: 1, DESC: -1}
+        const sortList = query.sort.split(',').map(el=>el.split('_'))
+        sortList.forEach(el=>{
+            sortingFilter[el[0]] = sortorder[el[1]]
+        })
+    }
+    try{ 
+        const flights = await flightrepository.getAll(
+          customFilter,
+          sortingFilter
+        );
         return flights
     }
     catch(error){
