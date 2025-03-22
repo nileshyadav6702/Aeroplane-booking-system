@@ -29,7 +29,7 @@ async function createFlight(req,res){
 }
 async function getFlights(req,res) {
     try {
-        let allFlights =await  FlightService.getAllFlights();
+        let allFlights =await  FlightService.getAllFlights(req.query);
         CommonError.SuccessResponse.data = allFlights
         return res.status(StatusCodes.OK).json(CommonError.SuccessResponse)
     }

@@ -8,6 +8,10 @@ class FlightRepository extends CrudRepository {
   async getAll(filter, sort) {
     const response = await FlightModel.find(filter)
       .sort(sort)
+      .populate("airplaneId")
+      .populate("departureAirportId")
+      .populate("arrivalAirportId")
+      .populate("departureAirportId.cityId");
 
     return response;
   }
