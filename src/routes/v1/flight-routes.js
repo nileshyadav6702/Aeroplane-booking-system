@@ -1,22 +1,33 @@
-const express=require('express')
+const express = require("express");
 const { FlightController } = require("../../controllers");
-const {MongoIdMiddleware, FlightMiddleware} = require('../../middlewares');
-const flightRoute=express.Router()
+const { MongoIdMiddleware, FlightMiddleware } = require("../../middlewares");
+const flightRoute = express.Router();
 
 //create an airport API:- /api/v1/flight POST
-flightRoute.post('/',FlightMiddleware.validatecreateflight, FlightController.createFlight)
+flightRoute.post(
+  "/",
+  FlightMiddleware.validatecreateflight,
+  FlightController.createFlight
+);
 
 //get all the airport API:- /api/v1/flight GET
-flightRoute.get('/',FlightController.getFlights)
+flightRoute.get("/", FlightController.getFlights);
 
 //get all the airport API:- /api/v1/flight/:id GET
-flightRoute.get('/:id', MongoIdMiddleware, FlightController.getFlight)
+flightRoute.get("/:id", MongoIdMiddleware, FlightController.getFlight);
 
 //get all the airport API:- /api/v1/flight/:id DELETE
-flightRoute.delete('/:id', MongoIdMiddleware, FlightController.deleteFlight)
+flightRoute.delete("/:id", MongoIdMiddleware, FlightController.deleteFlight);
 
 //update the airport API:- /api/v1/flight/:id UPDATE
-flightRoute.delete('/:id', MongoIdMiddleware, FlightController.updateFlight)
+flightRoute.put("/:id", MongoIdMiddleware, FlightController.updateFlight);
 
+//update the airport API:- /api/v1/flights/updateseat/:id UPDATE
+flightRoute.put(
+  "/updateseat/:id",
+  MongoIdMiddleware,
+  FlightMiddleware.validateupdateseat,
+  FlightController.updateSeats
+);
 
-module.exports = flightRoute
+module.exports = flightRoute;

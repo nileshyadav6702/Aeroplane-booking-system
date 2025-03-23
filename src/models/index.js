@@ -4,4 +4,5 @@ module.exports = {
   AirportModel: require("./Airport"),
   FlightModel: require("./Flight"),
   SeatModel: require("./Seat"),
+  BookingModel: require("./Booking")
 };

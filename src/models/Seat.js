@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { SeatEnum } = require("../utils/common");
-const { BUSINESS, ECONOMY, PREMINUM_ECONOMY, FIRST_CLASS } = SeatEnum.SEAT_TYPE;
+const { Enum } = require("../utils/common");
+const { BUSINESS, ECONOMY, PREMINUM_ECONOMY, FIRST_CLASS } = Enum.SEAT_TYPE;
 
 const SeatSchema = new mongoose.Schema(
   {

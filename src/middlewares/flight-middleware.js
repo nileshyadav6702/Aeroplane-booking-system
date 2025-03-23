@@ -70,4 +70,11 @@ function validatecreateflight(req, res, next) {
   next();
 }
 
-module.exports = { validatecreateflight };
+function validateupdateseat(req, res, next) {
+  if(!req.body.seats) {
+    ErrorResponse.message = 'Something went wrong while updating the seats'
+    return res.status(StatusCodes.NOT_FOUND).json(ErrorResponse)
+  }
+  next()
+}
+module.exports = { validatecreateflight, validateupdateseat };

@@ -15,6 +15,17 @@ class FlightRepository extends CrudRepository {
 
     return response;
   }
+
+  async updateRemainingSeats(flightId, seat, dec = true) {
+
+    let res
+    if (dec) {
+      res = await FlightModel.updateOne({ _id: flightId }, { $inc: { totalSeats: -seat } });
+    } else {
+      res = await FlightModel.updateOne({ _id: flightId }, { $inc: { totalSeats: seat } });
+    }
+    return res
+  }
 }
 
 module.exports = FlightRepository;

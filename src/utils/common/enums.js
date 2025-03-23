@@ -5,4 +5,10 @@ const SEAT_TYPE = {
   FIRST_CLASS: "First_Class",
 };
 
-module.exports = { SEAT_TYPE };
+const BOOKING_STATUS = {
+    BOOKED: "Booked",
+    CANCELLED: "Canclled",
+    INITIATED: "Initiated",
+    PENDING: "Pending"
+}
+module.exports = { SEAT_TYPE, BOOKING_STATUS };
